@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Análise de Desempenho - Escalonamento Round Robin</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f6;
+        }
+
+        .slide-container {
+
+            background-color: #ffffff;
+            display: flex;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .brand-stripe {
+            width: 20px;
+            height: 100%;
+            background-color: #003366;
+            /* Azul Institucional Escuro */
+            flex-shrink: 0;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 60px 80px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 20px;
+        }
+
+        .title-accent {
+            width: 60px;
+            height: 6px;
+            background-color: #00aaff;
+            /* Azul Ciano */
+            margin-bottom: 15px;
+            border-radius: 3px;
+        }
+
+        .bullet-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+
+        .icon-box {
+            width: 56px;
+            height: 56px;
+            background-color: #f0f7ff;
+            color: #0055aa;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-right: 24px;
+            flex-shrink: 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .content-area {
+            display: flex;
+            flex: 1;
+            gap: 60px;
+            height: 100%;
+        }
+
+        .text-column {
+            flex: 1.1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .chart-column {
+            flex: 0.9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 100%;
+            max-height: 420px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 20px;
+        }
+
+        /* Decorativos */
+        .deco-circle-1 {
+            position: absolute;
+            bottom: -24px;
+            right: -24px;
+            width: 96px;
+            height: 96px;
+            background-color: #eff6ff;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .deco-circle-2 {
+            position: absolute;
+            top: -24px;
+            left: -24px;
+            width: 64px;
+            height: 64px;
+            background-color: #f0f9ff;
+            border-radius: 50%;
+            z-index: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container shadow-2xl">
+        <!-- Faixa Lateral -->
+        <div class="brand-stripe"></div>
+        <!-- Conteúdo Principal -->
+        <div class="main-content">
+            <!-- Cabeçalho -->
+            <div class="header">
+                <div class="title-accent"></div>
+                <h2 class="text-5xl font-bold text-gray-900 mb-2">Análise de Desempenho</h2>
+                <p class="text-xl text-gray-500 font-light">Comportamento do algoritmo sob diferentes cargas de
+                    trabalho.</p>
+            </div>
+            <!-- Corpo do Slide -->
+            <div class="content-area">
+                <!-- Coluna de Texto (Bullets) -->
+                <div class="text-column">
+                    <div class="bullet-item">
+                        <div class="icon-box">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div>
+                            <p class="text-xl font-bold text-gray-800 mb-1">Crescimento Proporcional</p>
+                            <p class="text-lg text-gray-600 leading-relaxed">
+                                As métricas de tempo (retorno, espera, resposta) aumentam linearmente conforme a carga,
+                                comportamento esperado em algoritmos preemptivos como RR.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="bullet-item">
+                        <div class="icon-box">
+                            <i class="fas fa-stopwatch"></i>
+                        </div>
+                        <div>
+                            <p class="text-xl font-bold text-gray-800 mb-1">Estabilidade em Cargas Médias</p>
+                            <p class="text-lg text-gray-600 leading-relaxed">
+                                Até N = 10.000, o desempenho é robusto, com tempo de execução praticamente instantâneo
+                                (≤ 1ms), demonstrando eficiência do código Java.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="bullet-item">
+                        <div class="icon-box">
+                            <i class="fas fa-triangle-exclamation"></i>
+                        </div>
+                        <div>
+                            <p class="text-xl font-bold text-gray-800 mb-1">Impacto do Overhead</p>
+                            <p class="text-lg text-gray-600 leading-relaxed">
+                                Em N = 100.000, o tempo salta para 10ms. O custo computacional das interrupções e
+                                gerenciamento de filas massivas torna-se perceptível.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Coluna de Gráfico -->
+                <div class="chart-column">
+                    <div class="chart-container relative z-10">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                    <!-- Elementos decorativos flutuantes -->
+                    <div class="deco-circle-1"></div>
+                    <div class="deco-circle-2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="nav-footer">
+        <a href="slide9.html" class="nav-btn"><i class="fas fa-arrow-left"></i></a>
+        <a href="slide11.html" class="nav-btn"><i class="fas fa-arrow-right"></i></a>
+    </div>
+    <script>
+        const ctx = document.getElementById('performanceChart').getContext('2d');
+        const performanceChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['10', '100', '1.000', '10.000', '100.000'],
+                datasets: [{
+                    label: 'Tempo de Execução (ms)',
+                    data: [0, 0, 0, 1, 10],
+                    backgroundColor: 'rgba(0, 170, 255, 0.2)',
+                    borderColor: '#00aaff',
+                    borderWidth: 3,
+                    pointBackgroundColor: '#003366',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 6,
+                    pointHoverRadius: 8,
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            font: {
+                                family: 'Roboto',
+                                size: 14,
+                                weight: 'bold'
+                            },
+                            color: '#374151'
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Impacto do Volume de Processos (N)',
+                        font: {
+                            family: 'Roboto',
+                            size: 16
+                        },
+                        color: '#1f2937',
+                        padding: {
+                            bottom: 20
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Milisegundos (ms)',
+                            font: {
+                                weight: 'bold'
+                            }
+                        },
+                        grid: {
+                            color: '#f3f4f6'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Quantidade de Processos (N)',
+                            font: {
+                                weight: 'bold'
+                            }
+                        },
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

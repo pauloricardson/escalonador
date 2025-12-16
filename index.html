@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Capa - Escalonamento Round Robin</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f6;
+        }
+
+        .slide-container {
+            background-color: #ffffff;
+            display: flex;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .brand-stripe {
+            width: 20px;
+            height: 100%;
+            background-color: #003366;
+            /* Azul Institucional Escuro */
+            flex-shrink: 0;
+        }
+
+        .content-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .left-panel {
+            flex: 1.1;
+            padding: 60px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+            background-color: #ffffff;
+        }
+
+        .right-panel {
+            flex: 0.9;
+            position: relative;
+            overflow: hidden;
+            background-color: #f0f4f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .right-panel img {
+            width: 100%;
+            height: 100%;
+            object-position: center;
+        }
+
+        .title-accent {
+            width: 100px;
+            height: 8px;
+            background-color: #00aaff;
+            /* Azul Ciano para destaque */
+            margin-bottom: 25px;
+        }
+
+        .bottom-info {
+            margin-top: auto;
+            padding-top: 25px;
+            border-top: 1px solid #e2e8f0;
+            color: #475569;
+            font-size: 0.85rem;
+        }
+
+        /* Decoração geométrica sutil */
+        .geo-shape {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background-color: #003366;
+            opacity: 0.05;
+            border-top-left-radius: 100%;
+        }
+
+        .team-list {
+            font-size: 0.9rem;
+            color: #64748b;
+            line-height: 1.4;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container shadow-2xl">
+        <!-- Faixa Lateral da Marca -->
+        <div class="brand-stripe"></div>
+        <div class="content-wrapper">
+            <!-- Painel de Texto -->
+            <div class="left-panel">
+                <div class="flex items-center mb-8 text-blue-900">
+                    <p>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Instituto_Federal_do_Cear%C3%A1%2C_Campus_Iguatu_-_Marca_Horizontal_2015.svg/1024px-Instituto_Federal_do_Cear%C3%A1%2C_Campus_Iguatu_-_Marca_Horizontal_2015.svg.png"
+                            alt="" width="300px">
+                    </p>
+                </div>
+                <!-- Título Principal -->
+                <div class="title-accent"></div>
+                <h1 class="text-5xl font-black text-gray-900 leading-tight mb-4">
+                    Escalonamento<br />
+                    <span class="text-blue-800">Round Robin</span>
+                </h1>
+                <!-- Subtítulo -->
+                <h2 class="text-xl text-gray-600 font-normal mb-8 leading-relaxed max-w-2xl">
+                    Implementação e análise de desempenho com interrupções simuladas em Java.
+                </h2>
+                <!-- Rodapé do Slide -->
+                <div class="bottom-info">
+                    <div class="mb-3">
+                        <p class="font-bold text-blue-900 mb-1">Disciplina: Sistemas Operacionais</p>
+                        <p class="text-gray-600">Professor: Ricardo Cesar</p>
+                    </div>
+                    <div class="mt-4">
+                        <p class="font-bold text-blue-900 mb-2 text-xs uppercase tracking-wide">Equipe de
+                            Desenvolvimento:</p>
+                        <div class="team-list">
+                            <p>• Arnon Luis Mota Aragão</p>
+                            <p>• Paulo Ricardson S. Costa</p>
+                            <p>• Carlos Allan C. Nunes</p>
+                            <p>• Matheus Alves de Araújo</p>
+                            <p>• Davi Vieira Passos Beserra</p>
+                            <p>• Thiago Rodrigues Costa</p>
+                            <p>• Nathanael Alves Bezerra</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Elemento decorativo -->
+                <div class="geo-shape"></div>
+            </div>
+            <!-- Painel de Imagem -->
+            <div class="right-panel">
+                <img alt="Visualização abstrata de processos de computador e escalonamento de CPU"
+                    src="arquivos/Captura de tela 2025-12-16 173237.png" />
+                <!-- Overlay sutil azul para harmonizar -->
+                <div class="absolute inset-0 bg-blue-900 opacity-20"></div>
+            </div>
+        </div>
+    </div>
+    <div class="nav-footer">
+        <a href="slide2.html" class="nav-btn"><i class="fas fa-arrow-right"></i></a>
+    </div>
+</body>
+
+</html>

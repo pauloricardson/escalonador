@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Roboto:wght@300;400;500;700&amp;family=Fira+Code:wght@400;500;600&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #e5e7eb;
+        }
+
+        .slide-container {
+
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .top-bar {
+            background-color: #003366;
+            height: 8px;
+            width: 100%;
+        }
+
+        .header-section {
+            padding: 30px 60px 10px 60px;
+            flex-shrink: 0;
+        }
+
+        .main-section {
+            flex: 1;
+            padding: 10px 60px 30px 60px;
+            display: flex;
+            flex-direction: column;
+            background-color: #fcfcfc;
+            position: relative;
+        }
+
+        .footer-section {
+            padding: 15px 60px;
+            background-color: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #64748b;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Code Card Styles */
+        .code-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: transform 0.2s;
+            height: 100%;
+        }
+
+        .code-header {
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .code-header-title {
+            font-family: 'Fira Code', monospace;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .code-body {
+            background-color: #1e293b;
+            /* Dark slate */
+            color: #e2e8f0;
+            padding: 16px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            flex: 1;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        .code-annotation {
+            background-color: #f1f5f9;
+            padding: 10px 16px;
+            font-size: 0.8rem;
+            color: #475569;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        /* Syntax Highlighting Mock */
+        .kw {
+            color: #c678dd;
+        }
+
+        /* Keyword: purple */
+        .type {
+            color: #e5c07b;
+        }
+
+        /* Type: yellow */
+        .func {
+            color: #61afef;
+        }
+
+        /* Function: blue */
+        .var {
+            color: #e06c75;
+        }
+
+        /* Variable: red */
+        .comment {
+            color: #7f848e;
+            font-style: italic;
+        }
+
+        /* Comment: gray */
+        .str {
+            color: #98c379;
+        }
+
+        /* String: green */
+
+        /* Relationships */
+        .relation-arrow {
+            position: absolute;
+            height: 2px;
+            background-color: #cbd5e1;
+            top: 50%;
+            z-index: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container shadow-2xl">
+        <div class="top-bar"></div>
+        <!-- Header -->
+        <div class="header-section">
+            <div class="flex items-center">
+                <div class="w-2 h-10 bg-blue-900 mr-4 rounded-sm"></div>
+                <h1 class="text-4xl font-bold text-gray-900">Implementação em Java: Estrutura</h1>
+            </div>
+        </div>
+        <!-- Main Content -->
+        <div class="main-section">
+            <!-- Intro Text -->
+            <div class="mb-6 text-gray-600 text-lg">
+                <p>O projeto foi arquitetado em três classes principais, separando a lógica de escalonamento da
+                    estrutura de dados do processo e das métricas.</p>
+            </div>
+            <!-- Grid of Classes -->
+            <div class="grid grid-cols-3 gap-6 h-full relative z-10">
+                <!-- Class 1: Escalonador (Base) -->
+                <div class="code-card border-t-4 border-blue-500">
+                    <div class="code-header bg-blue-50">
+                        <span class="code-header-title text-blue-800">Escalonador.java</span>
+                        <span class="text-xs px-2 py-1 bg-blue-200 text-blue-800 rounded">Abstract Base</span>
+                    </div>
+                    <div class="code-body">
+                        <span class="kw">public abstract class</span> <span class="type">Escalonador</span> {<br />
+                        <br />
+                        <span class="comment">// Métricas acumuladas</span><br />
+                        <span class="kw">protected</span> <span class="type">double</span> <span
+                            class="var">retornoMedio</span>;<br />
+                        <span class="kw">protected</span> <span class="type">double</span> <span
+                            class="var">esperaMedio</span>;<br />
+                        <br />
+                        <span class="comment">// Utilitários Comuns</span><br />
+                        <span class="kw">void</span> <span class="func">calcularMedias</span>(List list) {<br />
+                        <span class="comment">/* Stream API p/ média */</span><br />
+                        }<br />
+                        <br />
+                        <span class="kw">void</span> <span class="func">printMetricas</span>(<span
+                            class="type">String</span> sigla) {<br />
+                        System.out.println(...)<br />
+                        }<br />
+                        }
+                    </div>
+                    <div class="code-annotation">
+                        <p><strong>Responsabilidade:</strong> Define o contrato básico e centraliza o cálculo
+                            estatístico das médias de desempenho.</p>
+                    </div>
+                </div>
+                <!-- Class 2: Processo (Model) -->
+                <div class="code-card border-t-4 border-green-500">
+                    <div class="code-header bg-green-50">
+                        <span class="code-header-title text-green-800">Processo.java</span>
+                        <span class="text-xs px-2 py-1 bg-green-200 text-green-800 rounded">Model / Bean</span>
+                    </div>
+                    <div class="code-body">
+                        <span class="kw">class</span> <span class="type">Processo</span> <span
+                            class="kw">implements</span> Comparable {<br />
+                        <span class="kw">final int</span> <span class="var">id</span>, <span
+                            class="var">chegada</span>;<br />
+                        <span class="type">int</span> <span class="var">duracaoRestante</span>;<br />
+                        <br />
+                        <span class="comment">// Timestamps absolutos</span><br />
+                        <span class="type">int</span> <span class="var">primeiraResposta</span> = -1;<br />
+                        <span class="type">int</span> <span class="var">tempoConclusao</span> = -1;<br />
+                        <br />
+                        <span class="kw">void</span> <span class="func">decrementar</span>(<span class="type">int</span>
+                        qtd) {<br />
+                        <span class="kw">this</span>.restante -= qtd;<br />
+                        }<br />
+                        <br />
+                        <span class="comment">// Métricas Individuais</span><br />
+                        <span class="type">int</span> <span class="func">tempoEspera</span>() { ... }<br />
+                        }
+                    </div>
+                    <div class="code-annotation">
+                        <p><strong>Responsabilidade:</strong> Mantém o estado (duração restante) e calcula suas próprias
+                            métricas (Wait/Turnaround) baseadas nos timestamps.</p>
+                    </div>
+                </div>
+                <!-- Class 3: RoundRobin (Logic) -->
+                <div class="code-card border-t-4 border-purple-500">
+                    <div class="code-header bg-purple-50">
+                        <span class="code-header-title text-purple-800">RoundRobin.java</span>
+                        <span class="text-xs px-2 py-1 bg-purple-200 text-purple-800 rounded">Implementation</span>
+                    </div>
+                    <div class="code-body">
+                        <span class="kw">class</span> <span class="type">RoundRobin</span> <span
+                            class="kw">extends</span> <span class="type">Escalonador</span> {<br />
+                        <span class="kw">final int</span> <span class="var">QUANTUM</span>;<br />
+                        <span class="kw">final int</span> <span class="var">OVERHEAD</span> = 1;<br />
+                        <br />
+                        <span class="kw">public</span> <span class="type">RoundRobin</span>(List procs) {<br />
+                        <span class="comment">// Fila Circular</span><br />
+                        <span class="type">LinkedList</span> queue = ...;<br />
+                        <br />
+                        <span class="comment">// Loop principal</span><br />
+                        <span class="kw">while</span> (!queue.isEmpty()) {<br />
+                        <span class="comment">// Executa unidade por unidade</span><br />
+                        <span class="comment">// Checa interrupção</span><br />
+                        <span class="comment">// Aplica overhead se necessário</span><br />
+                        }<br />
+                        }<br />
+                        }
+                    </div>
+                    <div class="code-annotation">
+                        <p><strong>Responsabilidade:</strong> Implementa a lógica do algoritmo, gerenciando a fila
+                            <code>readyQueue</code> e as preempções por tempo ou chegada.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Visual connector hinting inheritance -->
+            <div
+                style="position: absolute; top: 40%; left: 28%; width: 5%; height: 2px; border-top: 2px dashed #94a3b8;">
+            </div>
+            <div
+                style="position: absolute; top: 39%; left: 32%; font-size: 10px; color: #64748b; background: white; padding: 0 4px;">
+                extends</div>
+        </div>
+        <!-- Footer -->
+        
+    </div>
+    <div class="nav-footer">
+        <a href="slide5.html" class="nav-btn"><i class="fas fa-arrow-left"></i></a>
+        <a href="slide7.html" class="nav-btn"><i class="fas fa-arrow-right"></i></a>
+    </div>
+</body>
+
+</html>

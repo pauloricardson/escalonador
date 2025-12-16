@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Roboto:wght@300;400;500;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #e5e7eb;
+        }
+
+        .slide-container {
+
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .top-bar {
+            background-color: #003366;
+            height: 8px;
+            width: 100%;
+        }
+
+        .header-section {
+            padding: 30px 60px 10px 60px;
+            flex-shrink: 0;
+        }
+
+        .main-section {
+            flex: 1;
+            padding: 10px 60px;
+            display: flex;
+            flex-direction: column;
+            background-color: #fcfcfc;
+            position: relative;
+        }
+
+        .footer-section {
+            padding: 15px 60px;
+            background-color: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #64748b;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Content Styles */
+        .info-panel {
+            background-color: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 15px 25px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 30px;
+        }
+
+        /* Timeline Container */
+        .timeline-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 4px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        .timeline-track {
+            position: relative;
+            width: 100%;
+            height: 120px;
+            border-bottom: 2px solid #cbd5e1;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .time-tick {
+            position: absolute;
+            bottom: -25px;
+            font-size: 0.8rem;
+            color: #64748b;
+            transform: translateX(-50%);
+        }
+
+        .tick-mark {
+            position: absolute;
+            bottom: 0;
+            width: 1px;
+            height: 8px;
+            background-color: #cbd5e1;
+        }
+
+        /* Process Blocks */
+        .block-exec {
+            height: 40px;
+            background-color: #3b82f6;
+            /* Blue */
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+            position: absolute;
+            bottom: 2px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .block-overhead {
+            height: 40px;
+            background-color: #ef4444;
+            /* Red */
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+            position: absolute;
+            bottom: 2px;
+            opacity: 0.9;
+            /* pattern for overhead */
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(255, 255, 255, 0.2) 5px, rgba(255, 255, 255, 0.2) 10px);
+            z-index: 11;
+        }
+
+        /* Events */
+        .event-marker {
+            position: absolute;
+            top: 5;
+            height: 100%;
+            border-left: 2px dashed #f59e0b;
+            z-index: 5;
+        }
+
+        .event-label {
+            position: absolute;
+            top: -35px;
+            background-color: #f59e0b;
+            color: white;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-arrow {
+            position: absolute;
+            top: -8px;
+            left: -5px;
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 10px solid #f59e0b;
+        }
+
+        /* Legend */
+        .legend-container {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #475569;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container shadow-2xl">
+        <div class="top-bar"></div>
+        <!-- Header -->
+        <div class="header-section">
+            <div class="flex items-center">
+                <div class="w-2 h-10 bg-blue-900 mr-4 rounded-sm"></div>
+                <h1 class="text-4xl font-bold text-gray-900">Interrupções Tipo C (Chegada de Processos)</h1>
+            </div>
+        </div>
+        <!-- Main Content -->
+        <div class="main-section">
+            <!-- Explanatory Panel -->
+            <div class="info-panel">
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-lg font-bold text-blue-900 mb-2 flex items-center">
+                            <i class="fas fa-bolt mr-2 text-yellow-500"></i> Evento de Interrupção
+                        </h3>
+                        <p class="text-gray-700 leading-snug text-sm">
+                            Sempre que um <strong>novo processo chega</strong> ao sistema (tempoChegada ≤ tempoAtual), a
+                            CPU interrompe a execução corrente imediatamente.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-blue-900 mb-2 flex items-center">
+                            <i class="fas fa-stopwatch-20 mr-2 text-red-500"></i> Custo de Overhead
+                        </h3>
+                        <p class="text-gray-700 leading-snug text-sm">
+                            O sistema aplica uma penalidade de tempo (overhead = 1 u.t.) para gerenciar a fila. O
+                            processo interrompido volta ao fim da fila se não terminou.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Impact Summary -->
+            <div class="mt-6 flex space-x-4">
+                <div class="flex-1 bg-white p-4 rounded-lg border border-gray-200 shadow-sm flex items-start">
+                    <div class="bg-blue-100 p-2 rounded-full mr-3 text-blue-600">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div>
+                        <h5 class="font-bold text-gray-800 text-sm">Impacto no Desempenho</h5>
+                        <p class="text-xs text-gray-600 mt-1">Em cargas altas, o acúmulo de overheads (1 u.t. por
+                            chegada) aumenta o tempo total de processamento (makespan).</p>
+                    </div>
+                </div>
+                <div class="flex-1 bg-white p-4 rounded-lg border border-gray-200 shadow-sm flex items-start">
+                    <div class="bg-green-100 p-2 rounded-full mr-3 text-green-600">
+                        <i class="fas fa-check-double"></i>
+                    </div>
+                    <div>
+                        <h5 class="font-bold text-gray-800 text-sm">Múltiplas Chegadas</h5>
+                        <p class="text-xs text-gray-600 mt-1">Se processos chegarem <em>durante</em> o overhead, eles
+                            são enfileirados, mas o overhead atual não é estendido.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+       
+    </div>
+    <div class="nav-footer">
+        <a href="slide4.html" class="nav-btn"><i class="fas fa-arrow-left"></i></a>
+        <a href="slide6.html" class="nav-btn"><i class="fas fa-arrow-right"></i></a>
+    </div>
+</body>
+
+</html>

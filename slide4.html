@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Roboto:wght@300;400;500;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #e5e7eb;
+        }
+
+        .slide-container {
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .top-bar {
+            background-color: #003366;
+            height: 8px;
+            width: 100%;
+        }
+
+        .header-section {
+            padding: 30px 60px 20px 60px;
+            border-bottom: 1px solid #e2e8f0;
+            flex-shrink: 0;
+        }
+
+        .main-section {
+            flex: 1;
+            padding: 0 60px;
+            display: flex;
+            flex-direction: row;
+            /* Two columns */
+            align-items: center;
+            background-color: #fcfcfc;
+            gap: 40px;
+        }
+
+        .footer-section {
+            padding: 15px 60px;
+            background-color: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #64748b;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Left Column Styles */
+        .content-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .info-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 5px solid #003366;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-card h3 {
+            color: #1e3a8a;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .info-card p {
+            color: #4b5563;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Right Column (Diagram) Styles */
+        .diagram-col {
+            flex: 1.2;
+            height: 480px;
+            background-color: #f0f9ff;
+            border-radius: 20px;
+            border: 2px dashed #bfdbfe;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Diagram Elements */
+        .process-box {
+            width: 70px;
+            height: 70px;
+            background-color: #3b82f6;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            z-index: 10;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .cpu-box {
+            width: 140px;
+            height: 120px;
+            background-color: #1e40af;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+        }
+
+        .queue-container {
+            width: 80%;
+            height: 100px;
+            border: 3px solid #cbd5e1;
+            border-radius: 12px;
+            position: absolute;
+            bottom: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Normally start, but centering for visual */
+            padding: 0 20px;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .queue-label {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: bold;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        /* Arrows */
+        .arrow-path {
+            fill: none;
+            stroke: #93c5fd;
+            stroke-width: 4;
+            stroke-dasharray: 8 4;
+            animation: dash 30s linear infinite;
+        }
+
+        @keyframes dash {
+            to {
+                stroke-dashoffset: -1000;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container shadow-2xl">
+        <div class="top-bar"></div>
+        <!-- Header -->
+        <div class="header-section">
+            <div class="flex items-center">
+                <div class="w-2 h-10 bg-blue-900 mr-4 rounded-sm"></div>
+                <h1 class="text-4xl font-bold text-gray-900">Quantum e Fila Circular</h1>
+            </div>
+        </div>
+        <!-- Main Content (2 Columns) -->
+        <div class="main-section">
+            <!-- Left Column: Text -->
+            <div class="content-col">
+                <!-- Card 1 -->
+                <div class="info-card">
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-clock text-blue-800 mr-2"></i>
+                        <h3 style="margin-bottom: 0;">Quantum Adotado</h3>
+                    </div>
+                    <p class="mt-2">
+                        Para os testes realizados neste projeto, foi definido um <strong>Quantum = 4</strong> unidades
+                        de tempo. Este valor determina a fatia máxima que cada processo pode usar antes de ser
+                        interrompido.
+                    </p>
+                </div>
+                <!-- Card 2 -->
+                <div class="info-card" style="border-left-color: #dc2626;">
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-exclamation-triangle text-red-600 mr-2"></i>
+                        <h3 style="margin-bottom: 0; color: #991b1b;">Quantum Pequeno</h3>
+                    </div>
+                    <p class="mt-2">
+                        Melhora a <strong>responsividade</strong> (o sistema parece mais rápido para o usuário), mas
+                        aumenta o número de trocas de contexto (context switches), gerando maior <em>overhead</em>.
+                    </p>
+                </div>
+                <!-- Card 3 -->
+                <div class="info-card" style="border-left-color: #16a34a;">
+                    <div class="flex items-center mb-2">
+                        <i class="fas fa-tachometer-alt text-green-600 mr-2"></i>
+                        <h3 style="margin-bottom: 0; color: #166534;">Quantum Grande</h3>
+                    </div>
+                    <p class="mt-2">
+                        Reduz o <em>overhead</em> da CPU, pois há menos trocas. Porém, prejudica o <strong>tempo de
+                            resposta</strong>, fazendo o sistema parecer "travado" para outros processos.
+                    </p>
+                </div>
+            </div>
+            <!-- Right Column: Visual Diagram -->
+            </div>
+        </div>
+        <!-- Footer -->
+        
+    </div>
+    <div class="nav-footer">
+        <a href="slide3.html" class="nav-btn"><i class="fas fa-arrow-left"></i></a>
+        <a href="slide5.html" class="nav-btn"><i class="fas fa-arrow-right"></i></a>
+    </div>
+</body>
+
+</html>

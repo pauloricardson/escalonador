@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&amp;family=Roboto:wght@300;400;500;700&amp;family=Fira+Code:wght@500&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #e5e7eb;
+        }
+
+        .slide-container {
+
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .top-bar {
+            background-color: #003366;
+            height: 8px;
+            width: 100%;
+        }
+
+        .header-section {
+            padding: 30px 60px 10px 60px;
+            flex-shrink: 0;
+        }
+
+        .main-section {
+            flex: 1;
+            padding: 20px 60px 40px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: #fcfcfc;
+        }
+
+        .footer-section {
+            padding: 15px 60px;
+            background-color: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #64748b;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Metric Cards */
+        .metric-card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 1px solid #f1f5f9;
+            height: 100%;
+        }
+
+        .icon-wrapper {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .metric-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            color: #1e293b;
+        }
+
+        .formula-box {
+            background-color: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            color: #475569;
+            margin-bottom: 16px;
+            width: 100%;
+        }
+
+        .metric-desc {
+            color: #64748b;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Specific Colors */
+        .card-blue .icon-wrapper {
+            background-color: #eff6ff;
+            color: #2563eb;
+        }
+
+        .card-blue {
+            border-top: 6px solid #2563eb;
+        }
+
+        .card-orange .icon-wrapper {
+            background-color: #fff7ed;
+            color: #ea580c;
+        }
+
+        .card-orange {
+            border-top: 6px solid #ea580c;
+        }
+
+        .card-green .icon-wrapper {
+            background-color: #f0fdf4;
+            color: #16a34a;
+        }
+
+        .card-green {
+            border-top: 6px solid #16a34a;
+        }
+
+        /* Summary Bar */
+        .summary-bar {
+            margin-top: 30px;
+            padding: 15px 25px;
+            background-color: #1e293b;
+            border-radius: 12px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container shadow-2xl">
+        <div class="top-bar"></div>
+        <!-- Header -->
+        <div class="header-section">
+            <div class="flex items-center">
+                <div class="w-2 h-10 bg-blue-900 mr-4 rounded-sm"></div>
+                <h1 class="text-4xl font-bold text-gray-900">Métricas de Desempenho</h1>
+            </div>
+        </div>
+        <!-- Main Content -->
+        <div class="main-section">
+            <!-- Intro Text -->
+            <div class="mb-6 text-gray-600 text-lg">
+                <p>Para avaliar a eficiência do escalonador, foram calculadas três métricas fundamentais para cada
+                    processo, extraindo-se a média global ao final da execução.</p>
+            </div>
+            <!-- Cards Grid -->
+            <div class="grid grid-cols-3 gap-8 h-full">
+                <!-- Metric 1: Turnaround -->
+                <div class="metric-card card-blue">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h3 class="metric-title">Tempo de Retorno<br /><span
+                            class="text-sm font-normal text-gray-500">(Turnaround Time)</span></h3>
+                    <div class="formula-box">
+                        Conclusão − Chegada
+                    </div>
+                    <p class="metric-desc">
+                        Representa o tempo total que o processo permanece no sistema, somando os períodos de execução e
+                        de espera, desde a sua criação até o término.
+                    </p>
+                </div>
+                <!-- Metric 2: Waiting -->
+                <div class="metric-card card-orange">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-hourglass-half"></i>
+                    </div>
+                    <h3 class="metric-title">Tempo de Espera<br /><span
+                            class="text-sm font-normal text-gray-500">(Waiting Time)</span></h3>
+                    <div class="formula-box">
+                        Retorno − Duração
+                    </div>
+                    <p class="metric-desc">
+                        Mede o tempo total que o processo passou aguardando na fila de prontos, sem estar executando na
+                        CPU. Indica a "ociosidade forçada" do processo.
+                    </p>
+                </div>
+                <!-- Metric 3: Response -->
+                <div class="metric-card card-green">
+                    <div class="icon-wrapper">
+                        <i class="fas fa-stopwatch"></i>
+                    </div>
+                    <h3 class="metric-title">Tempo de Resposta<br /><span
+                            class="text-sm font-normal text-gray-500">(Response Time)</span></h3>
+                    <div class="formula-box">
+                        1ª Execução − Chegada
+                    </div>
+                    <p class="metric-desc">
+                        É o intervalo entre a chegada do processo e o instante em que ele recebe a CPU pela
+                        <strong>primeira vez</strong>. Crítico para a percepção do usuário.
+                    </p>
+                </div>
+            </div>
+            <!-- Summary/Output Format -->
+            <div class="summary-bar shadow-md">
+                <div class="flex items-center">
+                    <i class="fas fa-terminal mr-4 text-green-400 text-xl"></i>
+                    <span class="font-mono text-sm tracking-wide">Output do Sistema:</span>
+                </div>
+                <div class="font-mono text-lg font-bold text-green-400 tracking-wider">
+                    RR [Média Retorno] [Média Resposta] [Média Espera]
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        
+    </div>
+    <div class="nav-footer">
+        <a href="slide6.html" class="nav-btn"><i class="fas fa-arrow-left"></i></a>
+        <a href="slide8.html" class="nav-btn"><i class="fas fa-arrow-right"></i></a>
+    </div>
+</body>
+
+</html>

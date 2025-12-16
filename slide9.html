@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Resultados de Execução</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f6;
+        }
+
+        .slide-container {
+
+            background-color: #ffffff;
+            display: flex;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .brand-stripe {
+            width: 20px;
+            height: 100%;
+            background-color: #003366;
+            flex-shrink: 0;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 50px 70px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 15px;
+        }
+
+        .title-accent {
+            width: 60px;
+            height: 6px;
+            background-color: #00aaff;
+            margin-bottom: 15px;
+            border-radius: 3px;
+        }
+
+        .columns-container {
+            display: flex;
+            flex: 1;
+            gap: 30px;
+        }
+
+        .col-card {
+            border-radius: 16px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .col-table {
+            flex: 1.4;
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .col-chart {
+            flex: 0.8;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+        }
+
+        .col-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        /* Table Styles */
+        .metrics-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 0.9rem;
+        }
+
+        .metrics-table th {
+            background-color: #f0f9ff;
+            color: #003366;
+            font-weight: 700;
+            padding: 12px 10px;
+            text-align: right;
+            border-bottom: 2px solid #bae6fd;
+        }
+
+        .metrics-table th:first-child {
+            text-align: left;
+            border-top-left-radius: 8px;
+        }
+
+        .metrics-table th:last-child {
+            border-top-right-radius: 8px;
+        }
+
+        .metrics-table td {
+            padding: 10px 10px;
+            text-align: right;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .metrics-table td:first-child {
+            text-align: left;
+            font-weight: 700;
+            color: #003366;
+        }
+
+        .metrics-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .metrics-table tr:hover td {
+            background-color: #f8fafc;
+        }
+
+        /* Chart Container */
+        .chart-wrapper {
+            flex: 1;
+            position: relative;
+            width: 100%;
+            min-height: 0;
+            /* Important for Chart.js responsiveness */
+        }
+
+        /* Custom Scrollbar for table if needed */
+        .table-responsive {
+            overflow-x: auto;
+            flex: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide-container shadow-2xl">
+        <div class="brand-stripe"></div>
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="title-accent"></div>
+                <h2 class="text-5xl font-bold text-gray-900 mb-2">Resultados de Execução</h2>
+                <p class="text-xl text-gray-500 font-light">Métricas de desempenho coletadas para diferentes volumes de
+                    carga.</p>
+            </div>
+            <!-- Columns -->
+            <div class="columns-container">
+                <!-- Column: Data Table -->
+                <div class="col-card col-table">
+                    <div class="col-header text-blue-900">
+                        <div
+                            class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3 text-blue-700">
+                            <i class="fas fa-table text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">Dados Consolidados</h3>
+                            <p class="text-sm opacity-75">Valores médios em unidades de tempo</p>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="metrics-table">
+                            <thead>
+                                <tr>
+                                    <th>N (Processos)</th>
+                                    <th>T. Retorno</th>
+                                    <th>T. Resposta</th>
+                                    <th>T. Espera</th>
+                                    <th>Execução</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>10</td>
+                                    <td>32,900</td>
+                                    <td>8,500</td>
+                                    <td>27,500</td>
+                                    <td>0 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>100</td>
+                                    <td>359,660</td>
+                                    <td>90,570</td>
+                                    <td>354,170</td>
+                                    <td>0 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>1.000</td>
+                                    <td>3.638,175</td>
+                                    <td>942,744</td>
+                                    <td>3.632,583</td>
+                                    <td>0 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>10.000</td>
+                                    <td>35.342,238</td>
+                                    <td>9.469,849</td>
+                                    <td>35.336,756</td>
+                                    <td>1 ms</td>
+                                </tr>
+                                <tr>
+                                    <td>100.000</td>
+                                    <td>352.984,566</td>
+                                    <td>94.716,218</td>
+                                    <td>352.979,081</td>
+                                    <td>10 ms</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- Column: Visualization -->
+                <div class="col-card col-chart">
+                    <div class="col-header text-gray-800">
+                        <div
+                            class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center mr-3 text-gray-700">
+                            <i class="fas fa-chart-line text-lg"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">Tendência</h3>
+                            <p class="text-sm opacity-75">Crescimento do Tempo de Retorno</p>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="metricsChart"></canvas>
+                    </div>
+                    <div class="mt-4 p-3 bg-blue-50 border border-blue-100 rounded-lg">
+                        <p class="text-sm text-blue-800 flex items-start">
+                            <i class="fas fa-info-circle mt-1 mr-2"></i>
+                            <span>Note o crescimento linear proporcional das métricas conforme N aumenta, característico
+                                do Round Robin.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="nav-footer">
+        <a href="slide8.html" class="nav-btn"><i class="fas fa-arrow-left"></i></a>
+        <a href="slide10.html" class="nav-btn"><i class="fas fa-arrow-right"></i></a>
+    </div>
+    <script>
+        const ctx = document.getElementById('metricsChart').getContext('2d');
+        const metricsChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['10', '100', '1k', '10k', '100k'],
+                datasets: [{
+                    label: 'Tempo de Retorno Médio',
+                    data: [32.9, 359.6, 3638.1, 35342.2, 352984.5],
+                    borderColor: '#00aaff',
+                    backgroundColor: 'rgba(0, 170, 255, 0.1)',
+                    borderWidth: 3,
+                    pointBackgroundColor: '#003366',
+                    pointRadius: 4,
+                    tension: 0.3,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        type: 'logarithmic',
+                        title: {
+                            display: true,
+                            text: 'Unidades de Tempo (Log)'
+                        },
+                        grid: {
+                            color: '#f1f5f9'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
